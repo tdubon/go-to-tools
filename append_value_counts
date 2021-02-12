@@ -1,0 +1,14 @@
+#adding value counts to labels in a column:
+#program adds a number to a label in a row - case where many rows appear for each id
+
+i = 0
+status = []
+for type in df_no_idx["pt_type"]: 
+    if type == "alert":
+        i += 1
+    if type != "alert":
+        i = 0
+    status.append(i)
+# 0 appended to before
+# 1+ to alerts
+len(status)
