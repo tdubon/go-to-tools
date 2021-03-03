@@ -1,0 +1,47 @@
+#list comprehensions to count
+res = [len(list(i)) for "D*", i in matches]
+res = [len(sub.group()) for sub in re.finditer(r'(.)\1*', path)]
+                                                
+                                                
+
+#LIST COMPREHENSIONS reference from HACKERRANK
+
+#lists numbers - steps over every element in a sequence
+# [ expression-involving-loop-variable for loop-variable in sequence ] 
+ListofNumbers = [ x for x in range(10)] 
+
+
+#nested list comprehensions - in writing
+# [ expression-involving-loop-variables for outer-loop-variable in outer-sequence for inner-loop-variable in inner-sequence ] 
+results = []
+for outer_loop_variable in outer_sequence:
+    for inner_loop_variable in inner_sequence:
+        results.append(expression_involving_loop_variables)
+        
+#nested list comprehension example
+#For example, if you want to generate ALL COMBINATIONS of lists [1,2,3] and [4,5,6], write:
+print([[x,y] for x in [1,2,3] 
+       for y in [4,5,6]])
+
+#list comprehensions - create a list and filter it
+# [ expression-involving-loop-variable for loop-variable in sequence if boolean-expression-involving-loop-variable ]
+ListofThreeMultiples = [x for x in range(10) if x % 3 == 0]
+
+
+#List Comprehension Problem
+
+#x, y, z - dimensions of cuboid along integer n
+# all possible coordinates (i,j,k) on a 3D grid
+#  i + j + k is not equal to n. Here, 
+
+if __name__ == '__main__':
+    x = int(input())
+    y = int(input())
+    z = int(input())
+    n = int(input())
+    i = list(range(0,x+1))
+    j = list(range(0,y+1))
+    k = list(range(0,z+1))
+    
+    perm = [[a, b, c] for a in i for b in j for c in k]
+    print([z for z in perm if (z[0] + z[1] + z[2]) != n]) 
