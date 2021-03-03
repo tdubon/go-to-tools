@@ -1,4 +1,29 @@
+#---------Example 1 - Extract time from full date entry
+
 from datetime import datetime
 
 time = datetime.strptime(first_txt, "%d-%m-%Y %H:%M:%S").time()   
 print(time) 
+
+#---------Example 2 - Importing data with desired date formatting
+#create new data frame
+cols = ["run_id", "pt_type", "speed", "lat", "lng", "time_of_point"]
+custom_date_parser = lambda x: datetime.strptime(x, "%d/%m/%Y %H:%M:%S.%f")
+df_no_idx = pd.read_csv("/Project/runs.csv", 
+                        parse_dates = ["time_of_point"], 
+                        dayfirst = True, date_parser=custom_date_parser,
+                        usecols=cols)
+#inspect
+df_no_idx.head()
+df_no_idx.info()
+df_no_idx.describe()
+df_no_idx.count()
+df_no_idx.describe().T
+df_no_idx["time_of_point"].describe().T
+
+#extract month-day, hrs:min, seconds to separate columns
+df_no_idx["year"] = df_no_idx["time_of_point"].dt.strftime("%Y")
+df_no_idx["month"] = df_no_idx["time_of_point"].dt.strftime("%m")
+df_no_idx["day"] = df_no_idx["time_of_point"].dt.strftime("%d")
+df_no_idx["hrs:min"] = df_no_idx["time_of_point"].dt.strftime("%H:%M")
+df_no_idx["seconds"] = df_no_idx["time_of_point"].dt.strftime("%S")
